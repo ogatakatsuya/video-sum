@@ -2,10 +2,12 @@
 YouTube video download and video editing functionality using ffmpeg
 """
 
-from pathlib import Path
-import yt_dlp
 import subprocess
-from ..llm.gemini_analyzer import KeyPoint
+from pathlib import Path
+
+import yt_dlp
+
+from ..llm.transcription_analyzer import KeyPoint
 
 
 def download_youtube_video(video_id, output_dir):

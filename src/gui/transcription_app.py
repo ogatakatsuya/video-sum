@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
-from src.llm.gemini_analyzer import extract_key_points_with_timestamps
+from src.llm.caption_analyzer import extract_key_events_from_captions
 from src.util.file_utils import load_video_extensions
 from src.util.video_utils import create_highlight_video, download_youtube_video
 from text.transcription import download_youtube_audio, transcribe_audio
@@ -155,7 +155,7 @@ if filtered_videos:
             if extract_button and gemini_api_key:
                 with st.spinner("Extracting key points with Gemini..."):
                     try:
-                        key_points_result = extract_key_points_with_timestamps(
+                        key_points_result = extract_key_events_from_captions(
                             transcription, gemini_api_key
                         )
                         st.session_state.key_points_result = key_points_result
