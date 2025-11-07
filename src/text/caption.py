@@ -3,6 +3,8 @@ from typing import Optional, Union
 from qwen_vl_utils import process_vision_info
 from transformers import AutoModelForVision2Seq, AutoProcessor
 
+from src.util.text_utils import clean_markdown_code_blocks
+
 
 class CaptionGenerator:
     def __init__(self, model_path: str):
@@ -108,4 +110,8 @@ class CaptionGenerator:
         output_text = self.processor.batch_decode(
             generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True
         )
-        return output_text[0]
+        
+        # Clean up markdown code blocks if present
+        result = clean_markdown_code_blocks(output_text[0])
+        
+        return result
